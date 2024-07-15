@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Result</title>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .score {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .result {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .result p {
+            margin: 10px 0;
+        }
+
+        .result .score {
+            font-weight: bold;
+        }
+
+        .result .score .value {
+            color: #4CAF50;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exam Result</h1>
+    <div class="result">
+        <p>Your score is: <span class="score"><span class="value">{{ score }}</span> out of {{ total }}</span></p>
+    </div>
+</body>
+</html>
