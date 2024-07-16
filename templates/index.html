@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Online Exam</h1>
+
+    <div class="progress-container">
+        <svg class="progress" viewBox="0 0 100 100">
+            <circle class="progress-circle-background" cx="50" cy="50" r="45"></circle>
+            <circle class="progress-circle" cx="50" cy="50" r="45"></circle>
+            <text class="progress-text" x="50" y="50">30:00</text>
+        </svg>
+    </div>
+
+    <form id="exam-form" action="/submit" method="post">
+        <!-- True/False Questions -->
+        {% for i, question in enumerate(questions_true_false) %}
+            <div class="question" id="question-{{ i + 1 }}">
+                <p>{{ i + 1 }}. {{ question[0] }}</p>
+                <input type="radio" id="true-{{ i + 1 }}" name="true-false-{{ i + 1 }}" value="True">
+                <label for="true-{{ i + 1 }}">True</label>
+                <input type="radio" id="false-{{ i + 1 }}" name="true-false-{{ i + 1 }}" value="False">
+                <label for="false-{{ i + 1 }}">False</label>
+            </div>
+        {% endfor %}
+
+        <!-- Single Choice Questions -->
+        {% for i, question in enumerate(questions_single_choice) %}
+            <div class="question" id="question-{{ questions_true_false | length + i + 1 }}">
+                <p>{{ questions_true_false | length + i + 1 }}. {{ question[0] }}</p>
+                {% for j, choice in enumerate(question[1]) %}
+                    <input type="radio" id="choice-{{ questions_true_false | length + i + 1 }}-{{ j }}" name="single-choice-{{ questions_true_false | length + i + 1 }}" value="{{ choice }}">
+                    <label class="choice-label" for="choice-{{ questions_true_false | length + i + 1 }}-{{ j }}">{{ choice }}</label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <!-- Multiple Choice Questions -->
+        {% for i, question in enumerate(questions_multiple_choice) %}
+            <div class="question" id="question-{{ questions_true_false | length + questions_single_choice | length + i + 1 }}">
+                <p>{{ questions_true_false | length + questions_single_choice | length + i + 1 }}. {{ question[0] }}</p>
+                {% for j, choice in enumerate(question[1]) %}
+                    <input type="checkbox" id="choice-{{ questions_true_false | length + questions_single_choice | length + i + 1 }}-{{ j }}" name="multiple-choice-{{ questions_true_false | length + questions_single_choice | length + i + 1 }}" value="{{ choice }}">
+                    <label class="choice-label" for="choice-{{ questions_true_false | length + questions_single_choice | length + i + 1 }}-{{ j }}">{{ choice }}</label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="button" id="prev-btn" onclick="showPreviousQuestion()" style="display: none;">Previous</button>
+        <button type="button" id="next-btn" onclick="showNextQuestion()">Next</button>
+        <button type="submit" id="submit-btn" style="display: none;">Submit</button>
+    </form>
+
+    <script>
+        let currentQuestionIndex = 1;
+        const totalQuestions = {{ questions_true_false|length + questions_single_choice|length + questions_multiple_choice|length }};
+        const examStartTime = Date.now();
+        const examDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

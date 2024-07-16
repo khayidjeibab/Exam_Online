@@ -1,0 +1,91 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.question {
+    display: none;
+}
+
+.question.active {
+    display: block;
+}
+
+/* Styles pour les boutons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Styles pour les réponses à choix unique */
+.choice-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style pour la barre de progression */
+.progress-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.progress {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.progress .progress-circle {
+    fill: none;
+    stroke: #4CAF50;
+    stroke-width: 10;
+    stroke-linecap: round;
+    animation: progress-animation 1800s linear forwards;
+}
+
+.progress .progress-circle-background {
+    fill: none;
+    stroke: #ddd;
+    stroke-width: 10;
+}
+
+.progress .progress-text {
+    font-size: 24px;
+    dominant-baseline: central;
+    text-anchor: middle;
+}
+
+@keyframes progress-animation {
+    from {
+        stroke-dasharray: 0 283;
+    }
+    to {
+        stroke-dasharray: 283 283;
+    }
+}
